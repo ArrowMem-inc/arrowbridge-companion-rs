@@ -1,0 +1,130 @@
+[
+ {
+  "in": "Call 1-800-555-0100 now",
+  "out": "Call now",
+  "offenders": [
+   "1-800-555-0100"
+  ]
+ },
+ {
+  "in": "(613) 555-0100 or 613.555.0100",
+  "out": " or ",
+  "offenders": [
+   "(613) 555-0100",
+   "613.555.0100"
+  ]
+ },
+ {
+  "in": "Dial 911 now, not 988",
+  "out": "Dial 911 now, not ",
+  "offenders": [
+   "988"
+  ]
+ },
+ {
+  "in": "Code 12345 and 123456 and 1234567",
+  "out": "Code and and 1234567",
+  "offenders": [
+   "12345",
+   "123456"
+  ]
+ },
+ {
+  "in": "Plain text, nothing.",
+  "out": "Plain text, nothing.",
+  "offenders": []
+ },
+ {
+  "in": "a  b   c .",
+  "out": "a b c.",
+  "offenders": []
+ },
+ {
+  "in": "x 555-0100 y",
+  "out": "x 555-0100 y",
+  "offenders": []
+ },
+ {
+  "in": "tel:+1 613 555 0100 end",
+  "out": "tel:+ end",
+  "offenders": [
+   "1 613 555 0100"
+  ]
+ },
+ {
+  "in": "Order 12-3456",
+  "out": "Order 12-3456",
+  "offenders": []
+ },
+ {
+  "in": "call me at 6135550100",
+  "out": "call me at 6135550100",
+  "offenders": []
+ },
+ {
+  "in": "1 613 555 0100",
+  "out": "",
+  "offenders": [
+   "1 613 555 0100"
+  ]
+ },
+ {
+  "in": "613-555-01000",
+  "out": "613-555-",
+  "offenders": [
+   "01000"
+  ]
+ },
+ {
+  "in": "a 123-456-7890. b , c",
+  "out": "a. b, c",
+  "offenders": [
+   "123-456-7890"
+  ]
+ },
+ {
+  "in": "",
+  "out": "",
+  "offenders": []
+ },
+ {
+  "in": "line1  \n  line2 988 ;ok",
+  "out": "line1 \n line2;ok",
+  "offenders": [
+   "988"
+  ]
+ },
+ {
+  "in": "9111",
+  "out": "9111",
+  "offenders": []
+ },
+ {
+  "in": "911911",
+  "out": "",
+  "offenders": [
+   "911911"
+  ]
+ },
+ {
+  "in": "year 20260 ok",
+  "out": "year ok",
+  "offenders": [
+   "20260"
+  ]
+ },
+ {
+  "in": "Ligne 514 555 0199, merci",
+  "out": "Ligne, merci",
+  "offenders": [
+   "514 555 0199"
+  ]
+ },
+ {
+  "in": "\u00e9t\u00e9 12345 \u00e0",
+  "out": "\u00e9t\u00e9 \u00e0",
+  "offenders": [
+   "12345"
+  ]
+ }
+]

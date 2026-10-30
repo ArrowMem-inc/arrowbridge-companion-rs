@@ -1,0 +1,22 @@
+[
+ {
+  "address": "http://192.168.1.20:8788",
+  "name": "fixture-box",
+  "payload": "{\"address\":\"http://192.168.1.20:8788\",\"name\":\"fixture-box\"}"
+ },
+ {
+  "address": "http://192.168.1.20:8788",
+  "name": "Owner's <Box> & \"co\"",
+  "payload": "{\"address\":\"http://192.168.1.20:8788\",\"name\":\"Owner's <Box> & \\\"co\\\"\"}"
+ },
+ {
+  "address": "http://192.168.1.20:8788",
+  "name": "caf\u00e9 \u2603 \ud83d\ude00",
+  "payload": "{\"address\":\"http://192.168.1.20:8788\",\"name\":\"caf\\u00e9 \\u2603 \\ud83d\\ude00\"}"
+ },
+ {
+  "address": "http://192.168.1.20:8788",
+  "name": "tab\tnew\nline \\ end",
+  "payload": "{\"address\":\"http://192.168.1.20:8788\",\"name\":\"tab\\tnew\\nline \\\\ end\"}"
+ }
+]

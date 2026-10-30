@@ -1,0 +1,47 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ArrowBridge test</title>
+<style>
+body{font:16px system-ui,sans-serif;max-width:32rem;margin:2rem auto;padding:0 1rem}
+textarea,input{width:100%;box-sizing:border-box;font:inherit;padding:.5rem}
+button{font:inherit;padding:.5rem 1rem;margin-top:.5rem}
+#reply{white-space:pre-wrap;border:1px solid #888;border-radius:.5rem;padding:.75rem;margin-top:1rem;min-height:3rem}
+#status{color:#888;font-size:.9rem}
+</style></head>
+<body>
+<h1>ArrowBridge test</h1>
+<p>Pairing key (from the machine that started the companion):</p>
+<input id="key" type="text">
+<p>Message:</p>
+<textarea id="msg" rows="3">hello</textarea>
+<button id="send">Send</button>
+<p id="status"></p>
+<div id="reply"></div>
+<script>
+const params = new URLSearchParams(location.search);
+const keyField = document.getElementById('key');
+if (params.get('key')) keyField.value = params.get('key');
+document.getElementById('send').onclick = async () => {
+  const statusEl = document.getElementById('status');
+  const replyEl = document.getElementById('reply');
+  statusEl.textContent = 'sending...';
+  replyEl.textContent = '';
+  try {
+    const res = await fetch('/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-ArrowBridge-Pair': keyField.value,
+      },
+      body: JSON.stringify({message: document.getElementById('msg').value}),
+    });
+    const data = await res.json();
+    statusEl.textContent = 'HTTP ' + res.status;
+    replyEl.textContent = data.reply || JSON.stringify(data);
+  } catch (e) {
+    statusEl.textContent = 'request failed';
+    replyEl.textContent = String(e);
+  }
+};
+</script>
+</body></html>

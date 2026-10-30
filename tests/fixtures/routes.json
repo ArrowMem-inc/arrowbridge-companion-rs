@@ -1,0 +1,741 @@
+{
+ "key": "fixture-pair-key-0123456789",
+ "system_prompt": "You are a test.",
+ "cases": [
+  {
+   "name": "unpaired_health",
+   "method": "GET",
+   "path": "/health",
+   "body": null,
+   "raw": null,
+   "headers": {},
+   "status": 404,
+   "content_type": "application/json",
+   "upstream_seen": [],
+   "json": {
+    "error": "not found"
+   }
+  },
+  {
+   "name": "unpaired_chat",
+   "method": "POST",
+   "path": "/chat",
+   "body": {
+    "message": "hi"
+   },
+   "raw": null,
+   "headers": {},
+   "status": 404,
+   "content_type": "application/json",
+   "upstream_seen": [],
+   "json": {
+    "error": "not found"
+   }
+  },
+  {
+   "name": "unpaired_unknown",
+   "method": "GET",
+   "path": "/nope",
+   "body": null,
+   "raw": null,
+   "headers": {},
+   "status": 404,
+   "content_type": "application/json",
+   "upstream_seen": [],
+   "json": {
+    "error": "not found"
+   }
+  },
+  {
+   "name": "health",
+   "method": "GET",
+   "path": "/health",
+   "body": null,
+   "raw": null,
+   "headers": {
+    "X-ArrowBridge-Pair": "fixture-pair-key-0123456789"
+   },
+   "status": 200,
+   "content_type": "application/json",
+   "upstream_seen": [],
+   "json": {
+    "status": "ok",
+    "upstream": "http://127.0.0.1:50619",
+    "model": "m-default",
+    "models": [
+     "alpha",
+     "beta"
+    ],
+    "pack_active": false
+   }
+  },
+  {
+   "name": "health_bearer",
+   "method": "GET",
+   "path": "/health",
+   "body": null,
+   "raw": null,
+   "headers": {
+    "Authorization": "Bearer fixture-pair-key-0123456789"
+   },
+   "status": 200,
+   "content_type": "application/json",
+   "upstream_seen": [],
+   "json": {
+    "status": "ok",
+    "upstream": "http://127.0.0.1:50619",
+    "model": "m-default",
+    "models": [
+     "alpha",
+     "beta"
+    ],
+    "pack_active": false
+   }
+  },
+  {
+   "name": "unknown_paired_get",
+   "method": "GET",
+   "path": "/nope",
+   "body": null,
+   "raw": null,
+   "headers": {
+    "X-ArrowBridge-Pair": "fixture-pair-key-0123456789"
+   },
+   "status": 404,
+   "content_type": "application/json",
+   "upstream_seen": [],
+   "json": {
+    "error": "not found"
+   }
+  },
+  {
+   "name": "unknown_paired_post",
+   "method": "POST",
+   "path": "/nope",
+   "body": {
+    "a": 1
+   },
+   "raw": null,
+   "headers": {
+    "X-ArrowBridge-Pair": "fixture-pair-key-0123456789"
+   },
+   "status": 404,
+   "content_type": "application/json",
+   "upstream_seen": [],
+   "json": {
+    "error": "not found"
+   }
+  },
+  {
+   "name": "chat_ok",
+   "method": "POST",
+   "path": "/chat",
+   "body": {
+    "message": "hello",
+    "history": [
+     {
+      "role": "system",
+      "content": "x"
+     },
+     {
+      "role": "user",
+      "content": "u1"
+     },
+     {
+      "role": "assistant",
+      "content": "a1"
+     },
+     {
+      "role": "user",
+      "content": ""
+     },
+     "junk"
+    ]
+   },
+   "raw": null,
+   "headers": {
+    "X-ArrowBridge-Pair": "fixture-pair-key-0123456789"
+   },
+   "status": 200,
+   "content_type": "application/json",
+   "upstream_seen": [
+    {
+     "path": "/v1/chat/completions",
+     "body": {
+      "model": "m-default",
+      "messages": [
+       {
+        "role": "system",
+        "content": "You are a test."
+       },
+       {
+        "role": "user",
+        "content": "u1"
+       },
+       {
+        "role": "assistant",
+        "content": "a1"
+       },
+       {
+        "role": "user",
+        "content": "hello"
+       }
+      ]
+     },
+     "auth": "Bearer local"
+    }
+   ],
+   "json": {
+    "reply": "Call or 911 now. Thanks.",
+    "model": "m-default",
+    "backend": "local"
+   }
+  },
+  {
+   "name": "chat_no_message",
+   "method": "POST",
+   "path": "/chat",
+   "body": {
+    "nope": 1
+   },
+   "raw": null,
+   "headers": {
+    "X-ArrowBridge-Pair": "fixture-pair-key-0123456789"
+   },
+   "status": 400,
+   "content_type": "application/json",
+   "upstream_seen": [],
+   "json": {
+    "error": "expected a JSON body with a \"message\" string"
+   }
+  },
+  {
+   "name": "chat_bad_json",
+   "method": "POST",
+   "path": "/chat",
+   "body": null,
+   "raw": "{not json",
+   "headers": {
+    "X-ArrowBridge-Pair": "fixture-pair-key-0123456789"
+   },
+   "status": 400,
+   "content_type": "application/json",
+   "upstream_seen": [],
+   "json": {
+    "error": "expected a JSON body with a \"message\" string"
+   }
+  },
+  {
+   "name": "msg_ok",
+   "method": "POST",
+   "path": "/v1/messages",
+   "body": {
+    "model": "alpha",
+    "max_tokens": 50,
+    "system": "ignored",
+    "messages": [
+     {
+      "role": "user",
+      "content": "hi"
+     },
+     {
+      "role": "system",
+      "content": "s"
+     }
+    ]
+   },
+   "raw": null,
+   "headers": {
+    "X-ArrowBridge-Pair": "fixture-pair-key-0123456789"
+   },
+   "status": 200,
+   "content_type": "application/json",
+   "upstream_seen": [
+    {
+     "path": "/v1/messages",
+     "body": {
+      "model": "m-alpha",
+      "messages": [
+       {
+        "role": "user",
+        "content": "hi"
+       }
+      ],
+      "max_tokens": 50,
+      "stream": false,
+      "system": "You are a test."
+     },
+     "auth": "Bearer local"
+    }
+   ],
+   "json": {
+    "id": "msg_local",
+    "type": "message",
+    "role": "assistant",
+    "content": [
+     {
+      "type": "text",
+      "text": "Dial or ok"
+     }
+    ],
+    "model": "m-alpha",
+    "stop_reason": "max_tokens",
+    "stop_sequence": null,
+    "usage": {
+     "input_tokens": 3,
+     "output_tokens": 5
+    }
+   }
+  },
+  {
+   "name": "msg_default_model",
+   "method": "POST",
+   "path": "/v1/messages",
+   "body": {
+    "messages": [
+     {
+      "role": "user",
+      "content": "hi"
+     }
+    ]
+   },
+   "raw": null,
+   "headers": {
+    "X-ArrowBridge-Pair": "fixture-pair-key-0123456789"
+   },
+   "status": 200,
+   "content_type": "application/json",
+   "upstream_seen": [
+    {
+     "path": "/v1/messages",
+     "body": {
+      "model": "m-default",
+      "messages": [
+       {
+        "role": "user",
+        "content": "hi"
+       }
+      ],
+      "max_tokens": 1024,
+      "stream": false,
+      "system": "You are a test."
+     },
+     "auth": "Bearer local"
+    }
+   ],
+   "json": {
+    "id": "msg_local",
+    "type": "message",
+    "role": "assistant",
+    "content": [
+     {
+      "type": "text",
+      "text": "Dial or ok"
+     }
+    ],
+    "model": "m-default",
+    "stop_reason": "max_tokens",
+    "stop_sequence": null,
+    "usage": {
+     "input_tokens": 3,
+     "output_tokens": 5
+    }
+   }
+  },
+  {
+   "name": "msg_unknown_model",
+   "method": "POST",
+   "path": "/v1/messages?beta=true",
+   "body": {
+    "model": "zzz",
+    "messages": [
+     {
+      "role": "user",
+      "content": "hi"
+     }
+    ]
+   },
+   "raw": null,
+   "headers": {
+    "X-ArrowBridge-Pair": "fixture-pair-key-0123456789"
+   },
+   "status": 200,
+   "content_type": "application/json",
+   "upstream_seen": [
+    {
+     "path": "/v1/messages",
+     "body": {
+      "model": "m-default",
+      "messages": [
+       {
+        "role": "user",
+        "content": "hi"
+       }
+      ],
+      "max_tokens": 1024,
+      "stream": false,
+      "system": "You are a test."
+     },
+     "auth": "Bearer local"
+    }
+   ],
+   "json": {
+    "id": "msg_local",
+    "type": "message",
+    "role": "assistant",
+    "content": [
+     {
+      "type": "text",
+      "text": "Dial or ok"
+     }
+    ],
+    "model": "m-default",
+    "stop_reason": "max_tokens",
+    "stop_sequence": null,
+    "usage": {
+     "input_tokens": 3,
+     "output_tokens": 5
+    }
+   }
+  },
+  {
+   "name": "msg_beta_url_model",
+   "method": "POST",
+   "path": "/v1/messages",
+   "body": {
+    "model": "beta",
+    "messages": [
+     {
+      "role": "user",
+      "content": "hi"
+     }
+    ]
+   },
+   "raw": null,
+   "headers": {
+    "X-ArrowBridge-Pair": "fixture-pair-key-0123456789"
+   },
+   "status": 200,
+   "content_type": "application/json",
+   "upstream_seen": [
+    {
+     "path": "/v1/messages",
+     "body": {
+      "model": "m-beta",
+      "messages": [
+       {
+        "role": "user",
+        "content": "hi"
+       }
+      ],
+      "max_tokens": 1024,
+      "stream": false,
+      "system": "You are a test."
+     },
+     "auth": "Bearer local"
+    }
+   ],
+   "json": {
+    "id": "msg_local",
+    "type": "message",
+    "role": "assistant",
+    "content": [
+     {
+      "type": "text",
+      "text": "Dial or ok"
+     }
+    ],
+    "model": "m-beta",
+    "stop_reason": "max_tokens",
+    "stop_sequence": null,
+    "usage": {
+     "input_tokens": 3,
+     "output_tokens": 5
+    }
+   }
+  },
+  {
+   "name": "msg_stream",
+   "method": "POST",
+   "path": "/v1/messages",
+   "body": {
+    "stream": true,
+    "messages": [
+     {
+      "role": "user",
+      "content": "hi"
+     }
+    ]
+   },
+   "raw": null,
+   "headers": {
+    "X-ArrowBridge-Pair": "fixture-pair-key-0123456789"
+   },
+   "status": 200,
+   "content_type": "text/event-stream",
+   "upstream_seen": [
+    {
+     "path": "/v1/messages",
+     "body": {
+      "model": "m-default",
+      "messages": [
+       {
+        "role": "user",
+        "content": "hi"
+       }
+      ],
+      "max_tokens": 1024,
+      "stream": false,
+      "system": "You are a test."
+     },
+     "auth": "Bearer local"
+    }
+   ],
+   "text": "event: message_start\ndata: {\"type\": \"message_start\", \"message\": {\"id\": \"msg_local\", \"type\": \"message\", \"role\": \"assistant\", \"content\": [], \"model\": \"m-default\", \"stop_reason\": null, \"stop_sequence\": null, \"usage\": {\"input_tokens\": 3, \"output_tokens\": 0}}}\n\nevent: content_block_start\ndata: {\"type\": \"content_block_start\", \"index\": 0, \"content_block\": {\"type\": \"text\", \"text\": \"\"}}\n\nevent: content_block_delta\ndata: {\"type\": \"content_block_delta\", \"index\": 0, \"delta\": {\"type\": \"text_delta\", \"text\": \"Dial or ok\"}}\n\nevent: content_block_stop\ndata: {\"type\": \"content_block_stop\", \"index\": 0}\n\nevent: message_delta\ndata: {\"type\": \"message_delta\", \"delta\": {\"stop_reason\": \"max_tokens\", \"stop_sequence\": null}, \"usage\": {\"output_tokens\": 5}}\n\nevent: message_stop\ndata: {\"type\": \"message_stop\"}\n\n"
+  },
+  {
+   "name": "msg_empty",
+   "method": "POST",
+   "path": "/v1/messages",
+   "body": {
+    "messages": []
+   },
+   "raw": null,
+   "headers": {
+    "X-ArrowBridge-Pair": "fixture-pair-key-0123456789"
+   },
+   "status": 200,
+   "content_type": "application/json",
+   "upstream_seen": [],
+   "json": {
+    "id": "msg_local",
+    "type": "message",
+    "role": "assistant",
+    "content": [
+     {
+      "type": "text",
+      "text": "(expected a non-empty \"messages\" array)"
+     }
+    ],
+    "model": "m-default",
+    "stop_reason": "end_turn",
+    "stop_sequence": null,
+    "usage": {
+     "input_tokens": 0,
+     "output_tokens": 0
+    }
+   }
+  },
+  {
+   "name": "msg_malformed",
+   "method": "POST",
+   "path": "/v1/messages",
+   "body": null,
+   "raw": "{x",
+   "headers": {
+    "X-ArrowBridge-Pair": "fixture-pair-key-0123456789"
+   },
+   "status": 200,
+   "content_type": "application/json",
+   "upstream_seen": [],
+   "json": {
+    "id": "msg_local",
+    "type": "message",
+    "role": "assistant",
+    "content": [
+     {
+      "type": "text",
+      "text": "(malformed request body)"
+     }
+    ],
+    "model": "m-default",
+    "stop_reason": "end_turn",
+    "stop_sequence": null,
+    "usage": {
+     "input_tokens": 0,
+     "output_tokens": 0
+    }
+   }
+  },
+  {
+   "name": "count_tokens",
+   "method": "POST",
+   "path": "/v1/messages/count_tokens",
+   "body": {
+    "model": "whatever",
+    "messages": [
+     {
+      "role": "user",
+      "content": "hi"
+     }
+    ]
+   },
+   "raw": null,
+   "headers": {
+    "X-ArrowBridge-Pair": "fixture-pair-key-0123456789"
+   },
+   "status": 200,
+   "content_type": "application/json",
+   "upstream_seen": [
+    {
+     "path": "/v1/messages/count_tokens",
+     "body": {
+      "model": "m-default",
+      "messages": [
+       {
+        "role": "user",
+        "content": "hi"
+       }
+      ]
+     },
+     "auth": "Bearer local"
+    }
+   ],
+   "json": {
+    "input_tokens": 7
+   }
+  },
+  {
+   "name": "count_tokens_bad",
+   "method": "POST",
+   "path": "/v1/messages/count_tokens",
+   "body": null,
+   "raw": "{x",
+   "headers": {
+    "X-ArrowBridge-Pair": "fixture-pair-key-0123456789"
+   },
+   "status": 400,
+   "content_type": "application/json",
+   "upstream_seen": [],
+   "json": {
+    "error": "malformed request body"
+   }
+  },
+  {
+   "name": "pair_session_no_key",
+   "method": "POST",
+   "path": "/pair-session",
+   "body": {},
+   "raw": null,
+   "headers": {},
+   "status": 404,
+   "content_type": "application/json",
+   "upstream_seen": [],
+   "json": {
+    "error": "not found"
+   }
+  },
+  {
+   "name": "pair_session_ok_shape",
+   "method": "POST",
+   "path": "/pair-session",
+   "body": {},
+   "raw": null,
+   "headers": {
+    "X-ArrowBridge-Pair": "fixture-pair-key-0123456789"
+   },
+   "status": 200,
+   "content_type": "application/json",
+   "upstream_seen": [],
+   "json": {
+    "token": "TEST-ONLY-NOT-A-KEY-TEST-ONLY-NOT-A-KEY-TES",
+    "expires_in": 3600
+   }
+  },
+  {
+   "name": "pair_start_closed",
+   "method": "POST",
+   "path": "/pair-start",
+   "body": {
+    "public_key": "AA==",
+    "commitment": "AA=="
+   },
+   "raw": null,
+   "headers": {},
+   "status": 404,
+   "content_type": "application/json",
+   "upstream_seen": [],
+   "json": {
+    "error": "not found"
+   }
+  },
+  {
+   "name": "pair_info_loopback",
+   "method": "GET",
+   "path": "/pair-info",
+   "body": null,
+   "raw": null,
+   "headers": {},
+   "status": 200,
+   "content_type": "application/json",
+   "upstream_seen": [],
+   "json": {
+    "pair_key": "fixture-pair-key-0123456789",
+    "addresses": [
+     "http://127.0.0.1:8788"
+    ],
+    "tls": false
+   }
+  },
+  {
+   "name": "pair_status_window_closed",
+   "method": "GET",
+   "path": "/pair-status",
+   "body": null,
+   "raw": null,
+   "headers": {},
+   "status": 404,
+   "content_type": "application/json",
+   "upstream_seen": [],
+   "json": {
+    "error": "not found"
+   }
+  },
+  {
+   "name": "pair_test_page",
+   "method": "GET",
+   "path": "/pair-test",
+   "body": null,
+   "raw": null,
+   "headers": {},
+   "status": 200,
+   "content_type": "text/html; charset=utf-8",
+   "upstream_seen": [],
+   "text": "<!doctype html>\n<html><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<title>ArrowBridge test</title>\n<style>\nbody{font:16px system-ui,sans-serif;max-width:32rem;margin:2rem auto;padding:0 1rem}\ntextarea,input{width:100%;box-sizing:border-box;font:inherit;padding:.5rem}\nbutton{font:inherit;padding:.5rem 1rem;margin-top:.5rem}\n#reply{white-space:pre-wrap;border:1px solid #888;border-radius:.5rem;padding:.75rem;margin-top:1rem;min-height:3rem}\n#status{color:#888;font-size:.9rem}\n</style></head>\n<body>\n<h1>ArrowBridge test</h1>\n<p>Pairing key (from the machine that started the companion):</p>\n<input id=\"key\" type=\"text\">\n<p>Message:</p>\n<textarea id=\"msg\" rows=\"3\">hello</textarea>\n<button id=\"send\">Send</button>\n<p id=\"status\"></p>\n<div id=\"reply\"></div>\n<script>\nconst params = new URLSearchParams(location.search);\nconst keyField = document.getElementById('key');\nif (params.get('key')) keyField.value = params.get('key');\ndocument.getElementById('send').onclick = async () => {\n  const statusEl = document.getElementById('status');\n  const replyEl = document.getElementById('reply');\n  statusEl.textContent = 'sending...';\n  replyEl.textContent = '';\n  try {\n    const res = await fetch('/chat', {\n      method: 'POST',\n      headers: {\n        'Content-Type': 'application/json',\n        'X-ArrowBridge-Pair': keyField.value,\n      },\n      body: JSON.stringify({message: document.getElementById('msg').value}),\n    });\n    const data = await res.json();\n    statusEl.textContent = 'HTTP ' + res.status;\n    replyEl.textContent = data.reply || JSON.stringify(data);\n  } catch (e) {\n    statusEl.textContent = 'request failed';\n    replyEl.textContent = String(e);\n  }\n};\n</script>\n</body></html>"
+  },
+  {
+   "name": "bad_content_length",
+   "method": "POST",
+   "path": "/chat",
+   "status": 400,
+   "json": {
+    "error": "malformed Content-Length"
+   }
+  },
+  {
+   "name": "oversized_content_length",
+   "method": "POST",
+   "path": "/chat",
+   "status": 400,
+   "json": {
+    "error": "invalid or oversized Content-Length"
+   }
+  },
+  {
+   "name": "pair_info_proxy_header",
+   "method": "GET",
+   "path": "/pair-info",
+   "body": null,
+   "raw": null,
+   "headers": {
+    "X-Forwarded-For": "1.2.3.4"
+   },
+   "status": 404,
+   "content_type": "application/json",
+   "upstream_seen": [],
+   "json": {
+    "error": "not found"
+   }
+  }
+ ]
+}

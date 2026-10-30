@@ -1,0 +1,29 @@
+[package]
+name = "arrowbridge-companion"
+version = "0.1.0"
+edition = "2024"
+license = "Apache-2.0"
+description = "ArrowBridge companion: a LAN checkpoint between a local model server and a paired phone"
+rust-version = "1.85"
+
+[features]
+default = ["mdns"]
+# mDNS advertisement (_arrowbridge._tcp.local.) so a phone can find the machine by name.
+mdns = ["dep:mdns-sd"]
+
+[dependencies]
+aes-gcm = "0.10"
+base64 = "0.22"
+fancy-regex = "0.14"
+getrandom = "0.3"
+hkdf = "0.12"
+hmac = "0.12"
+mdns-sd = { version = "0.13", optional = true }
+qrcode = { version = "0.14", default-features = false, features = ["svg"] }
+serde_json = "1"
+sha2 = "0.10"
+signal-hook = "0.3"
+socket2 = "0.6"
+subtle = "2"
+x25519-dalek = { version = "2", features = ["static_secrets"] }
+zeroize = "1"

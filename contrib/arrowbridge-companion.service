@@ -1,0 +1,38 @@
+# systemd USER unit for the ArrowBridge companion.
+#
+# Install:
+#   install -Dm755 target/release/arrowbridge-companion ~/.local/bin/arrowbridge-companion
+#   install -Dm644 contrib/arrowbridge-companion.service ~/.config/systemd/user/arrowbridge-companion.service
+#   install -Dm644 contrib/companion.env.example ~/.config/arrowbridge/companion.env   # then edit it
+#   systemctl --user daemon-reload && systemctl --user enable --now arrowbridge-companion
+#   loginctl enable-linger "$USER"     # keep it running with no one logged in (optional)
+[Unit]
+Description=ArrowBridge companion (LAN checkpoint between a local model and a paired phone)
+After=network.target
+StartLimitIntervalSec=60
+StartLimitBurst=5
+
+[Service]
+Type=simple
+EnvironmentFile=%h/.config/arrowbridge/companion.env
+ExecStart=%h/.local/bin/arrowbridge-companion
+# The binary sets SO_REUSEADDR, so a restart rebinds the same port at once. The pause here only
+# stops a crash loop from spinning; it is not working around a stranded port (the Python
+# companion's 10 second pause was).
+Restart=on-failure
+RestartSec=2
+# 2 is a refused configuration (public bind, bad value). Restarting cannot fix it.
+RestartPreventExitStatus=2
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+RestrictNamespaces=true
+LockPersonality=true
+MemoryDenyWriteExecute=true
+
+[Install]
+WantedBy=default.target

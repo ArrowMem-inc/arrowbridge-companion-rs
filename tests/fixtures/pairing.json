@@ -1,0 +1,201 @@
+{
+ "handshake": {
+  "phone_priv": "0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20",
+  "phone_pub": "07a37cbc142093c8b755dc1b10e86cb426374ad16aa853ed0bdfc0b2b86d1c7c",
+  "phone_nonce": "6465666768696a6b6c6d6e6f70717273",
+  "phone_commitment": "f4d9a82fd8b8a023f6c1c2e9245d3838ca33ae9c546fa9460796400c6556f159",
+  "handshake_id": "O0Pf2ruUmuhF-h514wT61g",
+  "companion_pub": "79323ff5df530e456f76bbc3562ebb09ad2f89295658b475a1b7e599290e8a17",
+  "companion_nonce": "73ff7889c2f8948c017b129a03ee12f7",
+  "companion_commitment": "55c0da330d5dfaa020bc241e2ec40317e7059e9e0332fc32ff5f7e458fd5048f",
+  "shared_secret": "3cea504567d963a3e9d99f76870d02c7e8004947d27d3973662f3beac08d2b08",
+  "session_key": "8243f61868748436468bbc906c3708bc104de3af22d0bad82c5adf52c0b46a95",
+  "code": "9912",
+  "proof": "966badcbf0e4f66921aa06513179e9e4403b2a1f6ae38f1f1b000375f4fec0ae",
+  "credential_nonce": "xDQsRWuShv5yE59J",
+  "credential_ciphertext": "xvFv03yIe3meiw4ztMh2u3G10LfXQimV+dAgTjeKtj/yt4FEjmQOCsY2XjOJ9L7F0Goky9q6ErTD9dM7wJw=",
+  "credential": "pc_vP40R1lT6ciNyOp_mrA8M5XS4d4TjGRuneA-YS75FDc"
+ },
+ "vectors": [
+  {
+   "shared": "a92cf39b85276bea83ffcd78a586ed4e4e4a4d68f86110f1125e357e6f429c13",
+   "phone_nonce": "ff351e51aada5d25fa576b70e513217d",
+   "comp_nonce": "cbe35a7ab132cc1bacaf6b16fc8e9c3d",
+   "comp_pub": "18e60594c388b6c655b530bba42f87b99d0315342762ef8959902be08ed51c85",
+   "phone_pub": "57ce99ef86452a17fb20806dbecf80e7e5dfa1b5c871d4c5953a027a5c7e1a92",
+   "key": "a4f8d76f3432e55e88aa1171522933fd08ee342acd751d5f0490a6a8133fd5d9",
+   "code": "7681"
+  },
+  {
+   "shared": "85c65fa49739e371b25170c32101514300c896fe6173594458aa63b299bb7c7d",
+   "phone_nonce": "6fd43b568ba9fd079c0e876d74e77bcf",
+   "comp_nonce": "0c7989849e14645673aca96698bcf17c",
+   "comp_pub": "507aa593eb21a7618665bbe2198996b8bd710faaab5b08e762a562f789ded555",
+   "phone_pub": "bb49419310e14c662465517d43de74e6f4085bc009b694ad26f5c38a06f4f4de",
+   "key": "19f2fd10f921a4628913926db65dbb8f75382dfb69ea20718b1bd52ce2616e41",
+   "code": "5877"
+  },
+  {
+   "shared": "f497ff03eea2ca2787e683d0d2a1fa0cb9edaa245fb810cda3fa9a2e33029272",
+   "phone_nonce": "6a4153a48fbe1e672b3232ee3ba394d9",
+   "comp_nonce": "b7c520e83a298f5d25e0884c6c9b44be",
+   "comp_pub": "2b9c365c282a808ad13e3bfdc0215f11010572493535f87cf5bf8fab701cd8e5",
+   "phone_pub": "b121d5424d8161a4d56db6e5f41fc22284eb96d9fdaf91c478e95c662460eb39",
+   "key": "30cc7a8d5de2176e820e0a38f6122456fc537407b4783f3977113b1bb37425dc",
+   "code": "7102"
+  },
+  {
+   "shared": "fdaa9a3c0de0e094734e8c34d3583417b5a253677b77a753e69edf38dfd34151",
+   "phone_nonce": "d39de35ae36ab31842184a3c34bd644c",
+   "comp_nonce": "e0d61941dc7e45a9e3dd0ffb8c107d96",
+   "comp_pub": "b6d56f6c62bce7f23368dfd35de9cbc238a8dafaf7f1a90d9bac1b57b809ee2d",
+   "phone_pub": "39dec04575e36dba8e1e10d89f5a3e912b2f897a32b2ffc02bdccc6c040e8ef4",
+   "key": "749c85f2ccea2258c67061f49600fb38fc6b754015ae0eed1ba62a92277dba9a",
+   "code": "1890"
+  },
+  {
+   "shared": "06758198e2168f9446f46aa15429c5a1da78c33b4522519183efa177f1a35d2e",
+   "phone_nonce": "1bd5d37e59d04f9af1ca96138ef16abd",
+   "comp_nonce": "7cd503de9bdce74e4d7041aebcd1bbb8",
+   "comp_pub": "0500c68e459851629787c12777d2513ec18489e3adbea33ab8db6e6efd6126bf",
+   "phone_pub": "7edf5ee97a0b9aca3ec653cefdc3c3bd695dd9710196345f95ddf9e349fb5adc",
+   "key": "3f008ee552e39ec7a2fd655b81c322b83fedf135dccec35c8643b6dfca2e7ef4",
+   "code": "9380"
+  },
+  {
+   "shared": "6c0abd103d05e455bca3d016e921fa4226241f6dccfc266080e9203f12d9737e",
+   "phone_nonce": "0e853df64f95c27e7b3bb8d5bdfe2fae",
+   "comp_nonce": "10bb975daf44503d4f1e0ef58b7917cd",
+   "comp_pub": "69e705f113221386517955910345e71f47136a5484ced819411c93e314fbf6e1",
+   "phone_pub": "ac2a6a725421507ea88bf9ae80e898684b8fed63da8b07e4e7cc6a1843e4286e",
+   "key": "7c61d600b91f22957d45211dd57745ab4ca60f314c466714ce4cd050a285631d",
+   "code": "0291"
+  },
+  {
+   "shared": "7eded6eff5f947033eb88b6d0f78e702f797f686afdf67f3765ddb824bc53fbb",
+   "phone_nonce": "c1e85c47966ec0a065759de4c3711e42",
+   "comp_nonce": "d62205bda6bda058129c31968aaa5fec",
+   "comp_pub": "090f9f9f81200ab0bc9e35ea9e19e3c4f098fb5a7c095befc3a6c010b33c00ee",
+   "phone_pub": "fed319e058413e4e753be8bbadde7ad334c3d16f1c8c4d2c2c32df30e905f2bc",
+   "key": "1cef1e9f140d03887c3e77dc287932781267d72d0207b5c785c0852b7023738e",
+   "code": "6279"
+  },
+  {
+   "shared": "95d7b6255aa26c5f4d028cb6fd6eb1da733991d8815c00751a8bb70b73b4f3e5",
+   "phone_nonce": "867e578937486a95963ee60e1665b2bd",
+   "comp_nonce": "089150f3114e86d133415c91c6ee82d3",
+   "comp_pub": "75c8ae4e086d610b7334eff1b37aca6a982a28e48f954533e3c6005fd1ab6ba5",
+   "phone_pub": "8340c32d22eb0d0dc6b3a0e41de3ef2ccb7e46ae211bc2db14535abc4dd47f47",
+   "key": "dacc38cbba007ca6fdb3ec12e0465b9d79e59185c3b188481a0f6bcb321fe8b8",
+   "code": "1907"
+  },
+  {
+   "shared": "8b56057a1d85886f0a3ed3d1984b46ffdd27873788262a46d94468822c211867",
+   "phone_nonce": "9d7184a28f9519f60a6f5edac948f0fc",
+   "comp_nonce": "6b672d244d0c0fdc1bcbc15f53b15034",
+   "comp_pub": "80a3347be63ec06828b21d0e123f6ecd48c63bc45de55c34645011fb2a07ad6f",
+   "phone_pub": "2862dfd14bcdf472dc381c22a589efaf4e0b231e3d33dd3a66c2236bc85dbffb",
+   "key": "dc1ca3d006ffbb71568d2289bb9262d0635b9b188640590a2643d835bb3a71cb",
+   "code": "7404"
+  },
+  {
+   "shared": "9fe1a3a357f07b192c5248e534919bdc24654273b1d4539a9d2a9b00c8a357d4",
+   "phone_nonce": "004638428679f75abffae89b74e8b9a2",
+   "comp_nonce": "ad01ac996df2e49392f7722036f549bb",
+   "comp_pub": "6f72401763806f13cb1f1c9203327fd231116c8884902d93d061c6369b59f516",
+   "phone_pub": "d90c385aca5b116de0c1c8c98fdf99666cada4f4418324fe820211cbfdef446a",
+   "key": "364c8ca90ad9c089fb396a9f4f5c3ce4795493db5136ccf13ab4bb03e2902a2d",
+   "code": "4885"
+  },
+  {
+   "shared": "0abd8ab96a6570ee3eaede0bcf007ce7e0c2cec3d660e016099502130267cc53",
+   "phone_nonce": "6f29d5d631a557485e00f20450ac31e0",
+   "comp_nonce": "662f7c69306855c5b32aa742572e109e",
+   "comp_pub": "c68061387a34bc623e5c9ff616383b90ab7044ed4dbdb84504735f1a0038d652",
+   "phone_pub": "145a9899a4a218ac391e6b31f8514184041cda06b355207026b3e51724205ba7",
+   "key": "2af660e2e3d2808a5e6dbb5460dd6d549eac4900a8d26f9aaedcffc3a3da3520",
+   "code": "1350"
+  },
+  {
+   "shared": "753278f561cfdbaae499ffdfef0da97613f1533a48c9986dd6e734f67ddd1594",
+   "phone_nonce": "507b64f53ad8d9af51d1d8999c60c84e",
+   "comp_nonce": "9ed25e2f864ee26c7614e1c0ea01d46f",
+   "comp_pub": "72deb58539e0dd2874ce5a7046d936da017436754746bc1d50e8cc63074997e2",
+   "phone_pub": "5f58009a3557424c91a80ed0895f8241c782020fba2b58fcb6c20fca3dc10f27",
+   "key": "3c9bebcef94d377b43ba4f77d028538b7546aef3a465d87cb6f66c09cb7d0420",
+   "code": "6693"
+  },
+  {
+   "shared": "315bc20a24100843a1229a4e166252b34071e6f5159c56aeb88391d2bae97a31",
+   "phone_nonce": "75cc33847a5cfd506add6ae1cbc2917f",
+   "comp_nonce": "b3b5438a396fafddeabc8fa4919a6c25",
+   "comp_pub": "308fd24547b5a511e3903ff0e93fec78791bd084a9ad1cddff119737eb696b29",
+   "phone_pub": "ca2f26d85f08909b997c25bcd60d06c38b8668a390c681d8f44896156b1b2133",
+   "key": "89f11aa9143089eb3ecadac811308044e0f3a36dcd28fb0a7f211497da917ddb",
+   "code": "4626"
+  },
+  {
+   "shared": "773ab244d3e1ca58885b39bad658004876959ebda741be020c84fc6750d4e1d4",
+   "phone_nonce": "5c4ddd4a995d6bd27869a558c3a8283f",
+   "comp_nonce": "6825c17ca2d70588ff45e29a9714c82e",
+   "comp_pub": "9dbe3006ab9d1fbfefe4a612d1244ea76cdf86d1dcb87f607f6b1ede228c2b97",
+   "phone_pub": "f6f5351c79bc955f87c34fe9568501af3b368dc1bbf24edb252e6e1d0763a862",
+   "key": "6b2c8682adcf65df0b1de80b3eacc8692d0e4db019e321717aa236b0ff28d240",
+   "code": "3421"
+  },
+  {
+   "shared": "145fbd72a33a2a7701d84bde5159bc86b4cae79b89b09abac54b0b10ba783101",
+   "phone_nonce": "a297f1c093e214183fd0a703426a049f",
+   "comp_nonce": "cc6d4ea2791de3f200abe8e891ae75be",
+   "comp_pub": "a57ef3dd11a97f60f7d355edb25dcb7c38bb073f7868579eb013c093869576bb",
+   "phone_pub": "765d25a0688fa576a8869a9c85925a29b1be8ca1e333c864e95bf218a0aa302b",
+   "key": "7ac1e0b46c7d65109e27f886d06946d7921337286e8e1d9ace61a0778d710b56",
+   "code": "2703"
+  },
+  {
+   "shared": "d71a4e3674d85e9de933158b9ef131ab617ab3bdf18b781e810a66ff9bc4df55",
+   "phone_nonce": "09893ae82df84a8128cf475c81a4b57e",
+   "comp_nonce": "b2f0f473f989f3f4213f38f27c53c553",
+   "comp_pub": "b7827c230b3d634b4add364a0ccbb4fbad47ad500417fa2eaeb097684d358ef0",
+   "phone_pub": "1164b5b3d01fe07adc44850574a11543494e3972f88b803d713dfb3d89861d10",
+   "key": "b65b69a37249d6a8e143a036c001a5a4c109192b2fa0302dd9fac45b3d92e4d0",
+   "code": "3452"
+  },
+  {
+   "shared": "ca6f3356002310e593ece2937b5bb94a6ad0f143f7c92a3ceea3c75d768741f5",
+   "phone_nonce": "7ff688f76434c6dd69116dffba66efcf",
+   "comp_nonce": "beb79869123a8462d5330e2cba3d3197",
+   "comp_pub": "e6a2fdfc459de5cac9724a3c5c544b1116fc53d85aa1fdc4db23382c29b5b581",
+   "phone_pub": "c0a8b178199e85ee5f7ab23eef8d06b6557cd5497f4a72af0b051765fa87a0bb",
+   "key": "080aba0726596b26de7a80a4b751a7ee74b0c1216597c909031d8b34dd45ddb0",
+   "code": "7232"
+  },
+  {
+   "shared": "a3619047d6d86467eff8cafe6206185d9f02780e6f015bbbf0241635d2d6e7ba",
+   "phone_nonce": "bd7ab88812d12f12367a1f9c1246c21d",
+   "comp_nonce": "ee94afa9f2bb5481e382a82fa193be52",
+   "comp_pub": "ed15a566a807068d294e2563d36d303df8943fd7ee8a921df0a5e364792f2591",
+   "phone_pub": "cbfa9d779bd4348d89fd4793b29bc2f9287880f9d4ee32f38571a5decfba4c8d",
+   "key": "abea087676174d1e536ca1a819f1f07f36954356aed18c2e45a16f9977520778",
+   "code": "6331"
+  },
+  {
+   "shared": "896c227f788f3be427c74033b2960c50051c67a8887135d6c5f447c943d6891a",
+   "phone_nonce": "fd8636f452e05327bae5f622a1225f1f",
+   "comp_nonce": "3c78e4f24427794eeb03fcb16630b988",
+   "comp_pub": "7753be66015f395dfa1a38783652cb2f89abf241c0e62f4350253deb5a6a1d13",
+   "phone_pub": "2030400bc52750623b9c7330b090151465e8ebe5b30de1ef12cfe0bce3c0a2f3",
+   "key": "543717b9ee81fb01214af8793baeb619fc12774a3eb980a0f4db8035f6611aa0",
+   "code": "9476"
+  },
+  {
+   "shared": "edad7990425e7ad74fe2e971a8e0554c0832972eac2adfbfcdd5e1a069d276fd",
+   "phone_nonce": "716684e2464ec9bc8e478cdbc6149426",
+   "comp_nonce": "989f1c4b6698e8ae6ecca545fb2be46e",
+   "comp_pub": "418921e14fc25a927d26905631c347d546c7cd996a1ed259c6ad46b865f89361",
+   "phone_pub": "85b799b9470ab2c5d884e4ee2395fcc942528de9aee8681ff3cfa380d0366183",
+   "key": "1e76f66f70be06fc5998f4b12b519a2105dfeaad7a3b7ac74ffea5961835b8aa",
+   "code": "7581"
+  }
+ ]
+}

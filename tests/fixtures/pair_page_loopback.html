@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en" data-theme="white" data-mode="light">
+<head>
+<script>(function(){try{if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)document.documentElement.setAttribute('data-mode','dark');}catch(e){}})();</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ArrowBridge - companion pairing (machine side)</title>
+<style>
+:root{
+  --fs-display:40px; --fs-heading:28px; --fs-title:20px;
+  --fs-body:17px;    --fs-ui:15px;      --fs-small:14px; --fs-label:13px;
+  --lh-display:48px; --lh-heading:36px; --lh-title:28px;
+  --lh-body:26px;    --lh-ui:22px;      --lh-small:20px; --lh-label:16px;
+  --fw-reg:400; --fw-med:500; --fw-semi:600; --fw-bold:700;
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px;
+  --sp-6:24px; --sp-8:32px; --sp-12:48px; --sp-16:64px;
+  --r-sm:8px; --r-md:12px; --r-lg:20px; --r-xl:28px; --r-pill:999px;
+  --target:48px; --target-sm:32px;
+  --focus-ring:3px; --focus-gap:2px;
+  --font:"Public Sans","Inter","SF Pro Text",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-mono:ui-monospace,"Cascadia Mono","SF Mono",Menlo,Consolas,monospace;
+}
+[data-theme="white"][data-mode="light"]{
+  --surface:#FFFFFF; --surface-raised:#EDF3EE; --surface-sunken:#F7FAF8;
+  --border:#CBD8CE; --border-strong:#6E7F74;
+  --ink:#10231A; --ink-muted:#55665C; --ink-on-action:#FFFFFF;
+  --action:#14532D; --action-hover:#0E3D20; --action-soft:#DCE9DF;
+  --focus:#14532D;
+  --danger:#C8102E; --shadow:rgba(16,35,26,.12);
+}
+[data-theme="white"][data-mode="dark"]{
+  --surface:#0B0B0C; --surface-raised:#17181A; --surface-sunken:#070708;
+  --border:#2A2C2F; --border-strong:#878B91;
+  --ink:#ECEDEE; --ink-muted:#A2A6AC; --ink-on-action:#111214;
+  --action:#EDEEF0; --action-hover:#FFFFFF; --action-soft:#1E2023;
+  --focus:#FFFFFF;
+  --danger:#FF6A7E; --shadow:rgba(0,0,0,.6);
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{font-family:var(--font);font-size:var(--fs-body);line-height:var(--lh-body);
+  color:var(--ink);background:var(--surface-sunken);letter-spacing:-.011em;
+  -webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit}
+:focus-visible{outline:var(--focus-ring) solid var(--focus);outline-offset:var(--focus-gap);border-radius:var(--r-sm)}
+.gallery{display:grid;gap:var(--sp-12);max-width:520px;margin:0 auto;padding:var(--sp-12) var(--sp-4)}
+.machine-window{background:var(--surface);border:1px solid var(--border-strong);
+  border-radius:var(--r-lg);box-shadow:0 14px 40px var(--shadow);overflow:hidden}
+.machine-window__bar{display:flex;align-items:center;gap:var(--sp-2);
+  padding:var(--sp-2) var(--sp-4);background:var(--surface-raised);border-bottom:1px solid var(--border)}
+.machine-window__dot{width:10px;height:10px;border-radius:var(--r-pill);background:var(--border-strong);flex:none}
+.machine-window__t{font-size:var(--fs-label);font-weight:var(--fw-semi);color:var(--ink-muted)}
+.machine-window__body{padding:var(--sp-12) var(--sp-8);display:grid;gap:22px;justify-items:center;text-align:center}
+.idle-row{display:flex;align-items:center;gap:var(--sp-3);color:var(--ink-muted);font-size:var(--fs-small)}
+.idle-dot{width:8px;height:8px;border-radius:var(--r-pill);background:var(--action);flex:none}
+h2{margin:0;font-size:var(--fs-title);line-height:var(--lh-title);font-weight:var(--fw-semi)}
+.p-muted{margin:0;max-width:36ch;color:var(--ink-muted);font-size:var(--fs-small);line-height:22px}
+.matchcode{display:grid;gap:10px;justify-items:center;text-align:center}
+.matchcode__code{font-family:var(--font-mono);font-size:clamp(40px,10vw,56px);font-weight:var(--fw-bold);
+  letter-spacing:.1em;color:var(--ink)}
+.matchcode__hint{margin:0;max-width:38ch;color:var(--ink-muted);font-size:var(--fs-small)}
+.matchcode__acts{display:flex;gap:var(--sp-3);width:100%;max-width:360px;margin-top:4px}
+.matchcode__acts .btn{flex:1}
+.keypress-hint{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;
+  gap:6px 10px;padding:var(--sp-3) var(--sp-6);
+  background:var(--surface-sunken);border:1px solid var(--border);border-radius:var(--r-pill);
+  font-size:var(--fs-small);line-height:22px;color:var(--ink-muted)}
+kbd{font-family:var(--font-mono);font-size:var(--fs-label);font-weight:var(--fw-bold);
+  padding:2px var(--sp-2);border:1px solid var(--border-strong);border-radius:var(--r-sm);
+  background:var(--surface);color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--sp-2);
+  min-height:var(--target);padding:0 var(--sp-6);border-radius:var(--r-pill);cursor:pointer;
+  font-size:var(--fs-ui);font-weight:var(--fw-semi);background:var(--action);color:var(--ink-on-action);
+  border:1px solid var(--action)}
+.btn--ghost{background:var(--surface);color:var(--ink);border:1px solid var(--border-strong)}
+.truth{display:grid;gap:10px;padding:var(--sp-4) var(--sp-6);width:100%;margin-top:6px;
+  background:var(--surface-raised);border:1px solid var(--border-strong);border-radius:var(--r-md);
+  text-align:left}
+.truth__h{margin:0;font-size:var(--fs-label);font-weight:var(--fw-bold)}
+.truth__p{margin:0;font-size:var(--fs-label);line-height:19px;color:var(--ink-muted)}
+.pending-row{display:flex;align-items:center;gap:var(--sp-2);color:var(--action);font-size:var(--fs-small);font-weight:var(--fw-semi)}
+.spinner{width:16px;height:16px;flex:none;border-radius:var(--r-pill);
+  border:2px solid var(--border);border-top-color:var(--action);animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.pair-qr{width:180px;height:180px;margin:0 auto}
+.pair-qr img{width:100%;height:100%;display:block}
+.pair-addr{margin:0;font-size:var(--fs-label);color:var(--ink-muted);word-break:break-all}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="gallery">
+  <div class="machine-window">
+    <div class="machine-window__bar"><span class="machine-window__dot" id="dot"></span><span class="machine-window__t">ArrowBridge companion</span></div>
+    <div class="machine-window__body">
+
+      <div id="state-idle">
+        <div class="idle-row"><span class="idle-dot"></span> Running - waiting for a device to pair</div>
+        <p class="p-muted">Bind a LAN address (ARROWBRIDGE_BIND) to show a scannable code here.</p>
+        <p class="pair-addr">fixture-box &middot; (loopback only, not reachable from a phone)</p>
+        <button class="btn" id="start-btn" type="button">Start pairing</button>
+      </div>
+
+      <div id="state-code" hidden>
+        <h2>A phone wants to pair with this computer</h2>
+        <p class="p-muted">If this is you, check that your phone shows the same four digits, then confirm here.</p>
+        <div class="matchcode"><p class="matchcode__code" id="code-digits"></p></div>
+        <div class="keypress-hint">Press <kbd>Y</kbd> to confirm it's you, or <kbd>N</kbd> if it isn't</div>
+        <div class="matchcode__acts">
+          <button class="btn" id="yes-btn" type="button">Yes, that's my phone</button>
+          <button class="btn btn--ghost" id="no-btn" type="button">Not me</button>
+        </div>
+        <div class="truth">
+          <p class="truth__h">Why this asks twice</p>
+          <p class="truth__p">Your phone shows the same four digits. Confirming on both the phone and this computer is what stops someone else on the same network pairing while you're not sitting here.</p>
+        </div>
+      </div>
+
+      <div id="state-confirmed" hidden>
+        <div class="matchcode"><p class="matchcode__code" style="opacity:.5" id="code-digits-dim"></p></div>
+        <div class="pending-row"><span class="spinner"></span> Waiting for the phone to confirm too</div>
+        <p class="p-muted">Pairing finishes once both sides agree - not before.</p>
+      </div>
+
+      <div id="state-failed" hidden>
+        <h2>Nothing paired</h2>
+        <p class="p-muted">Either nobody confirmed in time, or one side said no. Ask the phone to try again if this was you.</p>
+        <div class="idle-row" style="justify-content:center"><span class="idle-dot" style="background:var(--ink-muted)"></span> Back to waiting</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var elIdle = document.getElementById('state-idle');
+  var elCode = document.getElementById('state-code');
+  var elConfirmed = document.getElementById('state-confirmed');
+  var elFailed = document.getElementById('state-failed');
+  var startBtn = document.getElementById('start-btn');
+  var yesBtn = document.getElementById('yes-btn');
+  var noBtn = document.getElementById('no-btn');
+  var codeDigits = document.getElementById('code-digits');
+  var codeDigitsDim = document.getElementById('code-digits-dim');
+  var handshakeId = null;
+  var sawCode = false;
+  var sawSuccess = false;
+  var pollTimer = null;
+
+  function show(el){
+    [elIdle, elCode, elConfirmed, elFailed].forEach(function(e){ e.hidden = (e !== el); });
+  }
+  function formatCode(code){
+    return String(code).split('').join(' ');
+  }
+  function stopPolling(){
+    if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
+  }
+  function backToIdle(){
+    stopPolling();
+    handshakeId = null; sawCode = false; sawSuccess = false;
+    startBtn.hidden = false;
+    show(elIdle);
+  }
+
+  function poll(){
+    fetch('/pair-status').then(function(res){
+      if (!res.ok) {
+        stopPolling();
+        if (sawSuccess) { backToIdle(); } else { show(elFailed); setTimeout(backToIdle, 3000); }
+        return null;
+      }
+      return res.json();
+    }).then(function(data){
+      if (!data) return;
+      handshakeId = data.handshake_id || handshakeId;
+      if (data.phone_confirmed) { sawSuccess = true; }
+      if (data.code) {
+        sawCode = true;
+        if (data.machine_confirmed) {
+          codeDigitsDim.textContent = formatCode(data.code);
+          show(elConfirmed);
+        } else {
+          codeDigits.textContent = formatCode(data.code);
+          show(elCode);
+        }
+      }
+    }).catch(function(){ /* a single missed poll is not a failure - the next tick retries */ });
+  }
+
+  startBtn.addEventListener('click', function(){
+    fetch('/pair-open', {method: 'POST', headers: {'X-ArrowBridge-Owner': '1'}}).then(function(){
+      startBtn.hidden = true;
+      pollTimer = setInterval(poll, 1000);
+      poll();
+    });
+  });
+  yesBtn.addEventListener('click', function(){
+    if (!handshakeId) return;
+    fetch('/pair-confirm', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'X-ArrowBridge-Owner': '1'},
+      body: JSON.stringify({handshake_id: handshakeId}),
+    });
+  });
+  noBtn.addEventListener('click', function(){
+    stopPolling();
+    fetch('/pair-cancel', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'X-ArrowBridge-Owner': '1'},
+      body: JSON.stringify({handshake_id: handshakeId}),
+    }).then(function(){ show(elFailed); setTimeout(backToIdle, 3000); });
+  });
+  document.addEventListener('keydown', function(ev){
+    if (elCode.hidden) return;
+    var k = (ev.key || '').toLowerCase();
+    if (k === 'y') yesBtn.click();
+    if (k === 'n') noBtn.click();
+  });
+})();
+</script>
+</body>
+</html>

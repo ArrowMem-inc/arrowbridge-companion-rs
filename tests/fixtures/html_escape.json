@@ -1,0 +1,18 @@
+[
+ {
+  "in": "fixture-box",
+  "out": "fixture-box"
+ },
+ {
+  "in": "Owner's <Box> & \"co\"",
+  "out": "Owner&#x27;s &lt;Box&gt; &amp; &quot;co&quot;"
+ },
+ {
+  "in": "caf\u00e9 \u2603 \ud83d\ude00",
+  "out": "caf\u00e9 \u2603 \ud83d\ude00"
+ },
+ {
+  "in": "tab\tnew\nline \\ end",
+  "out": "tab\tnew\nline \\ end"
+ }
+]
